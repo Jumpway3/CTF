@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Password Guessing Game</title>
+	<meta charset="utf-8">
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+			background-color: #f5f5f5;
+		}
+
+		h1 {
+			font-size: 2rem;
+			margin-bottom: 1rem;
+		}
+
+		.input-container {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 1rem;
+		}
+
+		.input-container input {
+			font-size: 1.2rem;
+			margin: 0 1rem;
+			padding: 0.5rem;
+			border: 2px solid #ccc;
+			border-radius: 5px;
+		}
+
+		.button-container {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.button-container button {
+			font-size: 1.2rem;
+			margin: 0 1rem;
+			padding: 0.5rem;
+			border: none;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: white;
+			cursor: pointer;
+		}
+
+		.prompt-container {
+			font-size: 1.2rem;
+			margin-top: 1rem;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Password Guessing Game</h1>
+	<div class="input-container">
+		<label for="guess">Enter your guess:</label>
+		<input type="text" id="guess">
+	</div>
+	<div class="button-container">
+		<button id="submit">Submit</button>
+	</div>
+	<div class="hintcontainer">Ciphertext:NjQgNzUgNjEgNzQgNjUgNWYgNDggNGIgNDIgNTUgN2QgNDMgNTQgNDYgN2IgNDcgNzIgNjE=</div>
+	
+	<div class="prompt-container" id="prompt"></div>
+	<div class="prompt-container" id="prompt"></div>
+	<div class="prompt-container" id="prompt"></div>
+	
+
+	<script>
+		// Backend password (encoded in base64)
+		const backendPassword = "Q1RGX3tHcmFkdWF0ZV9IS0JVfQ==";
+
+		// Get elements from the DOM
+		const guessInput = document.getElementById("guess");
+		const submitButton = document.getElementById("submit");
+		const promptDiv = document.getElementById("prompt");
+
+		// Event listener for submit button
+		submitButton.addEventListener("click", () => {
+			// Encode user's guess in base64
+			const encodedGuess = btoa(guessInput.value);
+
+			// Check if the guess matches the backend password
+			if (encodedGuess === backendPassword) {
+				promptDiv.innerHTML = "Congratulations! You catch the real flag!";
+			} else {
+				promptDiv.innerHTML = "Your input is false, please try again";
+			}
+		});
+	</script>
+</body>
+</html>
